@@ -52,16 +52,9 @@ class MoviesPresenterImpl(private val movieRepository: MovieRepository) : Movies
     }
 
     override fun getData() {
-        launch {
-            val result = runCatching {
-                movieRepository.getMovies()
-            }
-            result.onSuccess { moviesList ->
-                moviesView.showMovies(moviesList)
-            }.onFailure { error ->
-                handleError(error)
-            }
-        }
+        /*** TODO:
+         * get the movies & show in the UI
+         * */
     }
 
     override fun onStop() {

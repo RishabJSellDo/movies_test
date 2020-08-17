@@ -32,9 +32,8 @@ package com.raywenderlich.kotlin.coroutines.domain.repository
 import com.raywenderlich.kotlin.coroutines.data.api.MovieApiService
 import com.raywenderlich.kotlin.coroutines.data.database.MovieDao
 import com.raywenderlich.kotlin.coroutines.data.model.Movie
-import com.raywenderlich.kotlin.coroutines.di.API_KEY
+import com.raywenderlich.kotlin.coroutines.data.model.Result
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
 /**
@@ -45,10 +44,7 @@ class MovieRepositoryImpl(
     private val movieDao: MovieDao
 ) : MovieRepository {
 
-    override suspend fun getMovies(): List<Movie> = withContext(Dispatchers.IO) {
-        val cachedMoviesDeferred = async { movieDao.getSavedMovies() }
-        val fetchedMovies = movieApiService.getMovies(API_KEY).movies
-        val cachedMovies = cachedMoviesDeferred.await()
-        fetchedMovies ?: cachedMovies
+    override suspend fun getMovies(): Result<List<Movie>> = withContext(Dispatchers.IO) {
+        TODO("fetch movies from the API endpoint")
     }
 }
